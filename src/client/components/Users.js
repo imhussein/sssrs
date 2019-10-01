@@ -38,9 +38,16 @@ class Users extends Component {
   }
 }
 
-export default connect(
-  ({ users: { users } }) => ({
-    users
-  }),
-  { fetchUsers }
-)(Users);
+export function loadData(store) {
+  return store.dispatch(fetchUsers());
+}
+
+export default {
+  component: connect(
+    ({ users: { users } }) => ({
+      users
+    }),
+    { fetchUsers }
+  )(Users),
+  loadData
+};
